@@ -1,14 +1,4 @@
-# Tp
-process_temperature = 100
-
-# MTSR
-max_temp_synth_reaction = 120
-
-# td24
-td_24 = 150
-
-# mtt
-max_temp_technical = 130
+import matplotlib.pyplot as plt
 
 
 def get_class(tp, mtsr, td24, mtt):
@@ -29,4 +19,37 @@ def get_class(tp, mtsr, td24, mtt):
             return 4
 
 
-print(get_class(100, 190, 150, 200))
+def plot_class(tp, mtsr, td24, mtt):
+    fig, ax = plt.subplots(figsize=(3, 6))
+
+    # plt.ylabel("Temperature")
+    max_y_value = max(tp, mtsr, td24, mtt)
+    print(max_y_value)
+    ax.set_ylim(top=max_y_value * 1.2)
+    ax.set_xlim(left=0, right=1)
+    ax.xaxis.set_ticks([])
+    ax.set_xlabel("Criticality Class " + str(get_class(tp, mtsr, td24, mtt)))
+    ax.set_ylabel("Temperature")
+    plt.axhline(y=tp, color="green")
+    plt.annotate("Tp", xy=(0.5, tp + 1), color="green", weight="bold", ha="center")
+
+    plt.axhline(y=mtsr, color="blue")
+    plt.annotate("MTSR", xy=(0.5, mtsr + 1), color="blue", weight="bold", ha="center")
+
+    plt.axhline(y=mtt, color="brown")
+    plt.annotate("MTT", xy=(0.5, mtt + 1), color="brown", weight="bold", ha="center")
+
+    plt.axhline(y=td24, color="red", linestyle="-")
+    plt.annotate("TD24", xy=(0.5, td24 - 7), color="red", weight="bold", ha="center")
+
+    plt.fill_between(x=(0, 1), y1=td24, y2=300, facecolor="red", hatch="/")
+
+    plt.tight_layout()
+    plt.show()
+
+
+# Class 4 example:
+# plot_class(100, 190, 150, 120)
+
+# Class 1 example:
+plot_class(100, 120, 200, 140)
