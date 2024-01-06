@@ -24,7 +24,6 @@ def plot_class(tp, mtsr, td24, mtt):
 
     # plt.ylabel("Temperature")
     max_y_value = max(tp, mtsr, td24, mtt)
-    print(max_y_value)
     ax.set_ylim(top=max_y_value * 1.2)
     ax.set_xlim(left=0, right=1)
     ax.xaxis.set_ticks([])
@@ -52,4 +51,7 @@ def plot_class(tp, mtsr, td24, mtt):
 # plot_class(100, 190, 150, 120)
 
 # Class 1 example:
-plot_class(100, 120, 200, 140)
+# plot_class(100, 120, 200, 140)
+
+
+plot_class(40, 81, 130, 56)
